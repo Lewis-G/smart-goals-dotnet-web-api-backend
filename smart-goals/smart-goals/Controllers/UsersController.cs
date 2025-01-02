@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using smart_goals.Models;
+using smart_goals.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +17,13 @@ namespace smart_goals.Controllers
 
     public class UsersController : ControllerBase
     {
+
+        private IValidator<User> _validator;
+
+        public UsersController(IValidator<User> validator)
+        {
+            _validator = validator;
+        }
 
         [HttpGet]
         public ActionResult<IEnumerable<User>> GetAllUsers()
@@ -33,9 +44,16 @@ namespace smart_goals.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddUser([FromBody] User user)
+        public async Task<ActionResult> AddUser([FromBody] User user)
         {
-            return Ok();
+            ValidationResult result = await _validator.ValidateAsync(user);
+
+            if (!result.IsValid)
+            {
+                var formattedErrors = ValidationHelper.FormatValidationErrors(result.Errors);
+                return BadRequest(formattedErrors);
+            }
+            return Ok($"Username: {user.Username}");
         }
 
     }

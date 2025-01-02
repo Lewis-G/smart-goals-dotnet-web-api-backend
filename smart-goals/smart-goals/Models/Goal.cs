@@ -1,10 +1,15 @@
-﻿namespace smart_goals.Models
+﻿using System.Text.Json.Serialization;
+
+namespace smart_goals.Models
 {
     public class Goal
     {
         public int GoalID { get; set; }
         public string Name { get; set; } = string.Empty;
+        
+        //[JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly Date { get; set; }
+        
         public int TierLevel { get; set; }
         public int PriorityLevel { get; set; }
         public List<String> Tags { get; set; } = new List<string>();
