@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace smart_goals.Models
 {
-    public class GoalsList
+    public class GoalList
     {
-
-        public int GoalsListId { get; set; }
+        public int GoalListId { get; set; }
         public int UserID { get; set; }
         public string Name { get; set; } = string.Empty;
         public int ColourID { get; set; }

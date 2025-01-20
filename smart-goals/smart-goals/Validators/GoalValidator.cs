@@ -12,7 +12,7 @@ namespace smart_goals.Validators
     {
         public GoalValidator()
         {
-            RuleFor(goal => goal.GoalID)
+            RuleFor(goal => goal.GoalId)
                 .GreaterThan(0).WithMessage("GoalID must be greater than 0.");
 
             RuleFor(goal => goal.Name)
@@ -29,9 +29,9 @@ namespace smart_goals.Validators
             RuleFor(goal => goal.PriorityLevel)
                 .InclusiveBetween(1, 10).WithMessage("PriorityLevel must be between 1 and 10.");
 
-            RuleFor(goal => goal.Tags)
-                .Must(tags => tags == null || tags.All(tag => !string.IsNullOrWhiteSpace(tag)))
-                .WithMessage("Tags must not contain null or empty strings.");
+            //RuleFor(goal => goal.Tags)
+            //    .Must(tags => tags == null || tags.All(tag => !string.IsNullOrWhiteSpace(tag)))
+            //    .WithMessage("Tags must not contain null or empty strings.");
 
             RuleFor(goal => goal.Description)
                 .MaximumLength(500).WithMessage("Description must not exceed 500 characters.");

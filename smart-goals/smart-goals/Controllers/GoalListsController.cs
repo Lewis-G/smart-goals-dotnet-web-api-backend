@@ -11,7 +11,7 @@ namespace smart_goals.Controllers
     [ApiController]
     [Route("api/[controller]")]
 
-    public class ListsController : ControllerBase
+    public class GoalListsController : ControllerBase
     {
 
     }
