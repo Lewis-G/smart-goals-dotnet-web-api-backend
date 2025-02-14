@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
-using smart_goals.Models;
+using smart_goals.DTOs;
 
 namespace smart_goals.Validators
 {
-    public class UserValidator : AbstractValidator<User>
+    public class UserDTOValidator : AbstractValidator<UserDTO>
     {
-        public UserValidator()
+        public UserDTOValidator()
         {
             RuleFor(user => user.UserId)
+                .NotEmpty().WithMessage("Username is required.")
                 .GreaterThan(0).WithMessage("UserId must be greater than 0.");
 
             RuleFor(user => user.Username)
@@ -22,9 +23,6 @@ namespace smart_goals.Validators
             RuleFor(user => user.Password)
                 .NotEmpty().WithMessage("Password is required.")
                 .MinimumLength(6).WithMessage("Password must be at least 6 characters long.");
-
-            RuleFor(user => user.IsEnabled)
-                .NotNull().WithMessage("IsEnabled must be specified.");
         }
     }
 }

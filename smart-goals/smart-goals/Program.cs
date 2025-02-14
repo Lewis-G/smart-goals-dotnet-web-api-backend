@@ -14,7 +14,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddValidatorsFromAssemblyContaining<GoalValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<GoalDTOValidator>();
 
 var app = builder.Build();
 
